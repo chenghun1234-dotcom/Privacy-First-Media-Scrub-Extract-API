@@ -1,0 +1,110 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Privacy-First Media Scrub & Extract API",
+    "description": "High-performance, secure media processing API using WebAssembly. Processes data entirely in-memory with zero disk storage, ensuring ultimate privacy for B2B applications. Note: Maximum file size is 5MB.",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://privacy-first-media-scrub---extract-api.wpbb1.workers.dev",
+      "description": "Production Server"
+    }
+  ],
+  "paths": {
+    "/image/strip-exif": {
+      "post": {
+        "summary": "Strip Image Metadata",
+        "description": "Removes all EXIF metadata (GPS, camera info, etc.) from an image to protect privacy.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cleaned image file",
+            "content": {
+              "image/*": {}
+            }
+          }
+        }
+      }
+    },
+    "/pdf/extract-text": {
+      "post": {
+        "summary": "Extract Text from PDF",
+        "description": "Extracts raw text and structure from a PDF file into a clean JSON format.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Structured JSON text data",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/video/extract-frame": {
+      "post": {
+        "summary": "Extract Video Frame",
+        "description": "Captures a high-quality frame from a video at a specified timestamp.",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "timestamp": {
+                    "type": "string",
+                    "example": "00:00:05"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Extracted frame image",
+            "content": {
+              "image/jpeg": {}
+            }
+          },
+          "403": {
+            "description": "Tier Restriction - Upgrade required"
+          }
+        }
+      }
+    }
+  }
+}
