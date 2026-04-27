@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "privacy-first-media-scrub---extract-api",
+  "name": "privacy-first-media-scrub-extract-api",
   "main": "src/index.ts",
   "compatibility_date": "2026-04-26",
   "compatibility_flags": [
