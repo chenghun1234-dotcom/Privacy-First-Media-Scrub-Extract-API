@@ -16,6 +16,23 @@ app.use('*', async (c, next) => {
   await next()
 })
 
+// RapidAPI Security Middleware (Exclude / and /ping)
+app.use('*', async (c, next) => {
+  const path = c.req.path
+  if (path === '/' || path === '/ping') {
+    return await next()
+  }
+
+  const proxySecret = c.req.header('x-rapidapi-proxy-secret')
+  const expectedSecret = 'd9369720-4226-11f1-af79-d95f0f1c1c30'
+
+  if (proxySecret !== expectedSecret) {
+    return c.json({ error: 'Unauthorized: Requests must originate from RapidAPI.' }, 401)
+  }
+  
+  await next()
+})
+
 app.use('*', async (c, next) => {
   await next()
   c.header('X-Privacy-Statement', 'Processed entirely in-memory. Zero data retention.')
