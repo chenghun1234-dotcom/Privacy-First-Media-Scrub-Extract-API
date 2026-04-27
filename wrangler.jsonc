@@ -12,7 +12,7 @@
   "kv_namespaces": [
     {
       "binding": "TEMP_STORAGE",
-      "id": "YOUR_KV_NAMESPACE_ID_HERE"
+      "id": "e7d8f32afcf94702a1391bbeeb7024c2"
     }
   ],
   // "r2_buckets": [
