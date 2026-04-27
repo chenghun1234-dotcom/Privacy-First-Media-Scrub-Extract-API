@@ -22,6 +22,9 @@ app.use('*', async (c, next) => {
   c.header('X-Powered-By', 'WebAssembly/Hono/Cloudflare')
 })
 
+// RapidAPI Health Check
+app.get('/ping', (c) => c.json({ status: 'ok', timestamp: new Date().toISOString() }))
+
 app.get('/', (c) => {
   return c.html(html`
     <!DOCTYPE html>
