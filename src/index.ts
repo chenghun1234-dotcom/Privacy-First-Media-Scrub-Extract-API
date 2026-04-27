@@ -24,7 +24,7 @@ app.use('*', async (c, next) => {
   }
 
   const proxySecret = c.req.header('x-rapidapi-proxy-secret')
-  const expectedSecret = 'd9369720-4226-11f1-af79-d95f0f1c1c30'
+  const expectedSecret = 'b47975e0-4228-11f1-babb-d9d9f578acb6'
 
   if (proxySecret !== expectedSecret) {
     return c.json({ error: 'Unauthorized: Requests must originate from RapidAPI.' }, 401)
